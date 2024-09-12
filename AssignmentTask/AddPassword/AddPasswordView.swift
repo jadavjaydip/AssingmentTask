@@ -62,7 +62,7 @@ struct AddPasswordView: View {
         if !accountType.isEmpty && !username.isEmpty && !password.isEmpty {
             
             // Check for duplicate entries
-            if !isDublicateEntry(accountname: accountType, username: username) {
+            //if !isDublicateEntry(accountname: accountType, username: username) {
                 // Create a new Password entity
                 let newPassword = Password(context: viewContext)
                 newPassword.accountType = accountType
@@ -86,10 +86,10 @@ struct AddPasswordView: View {
                     self.errorMessage = "Failed to save the password: \(error.localizedDescription)"
                     self.isShowError = true
                 }
-            } else {
-                self.errorMessage = "An entry for this app and username already exists."
-                self.isShowError = true
-            }
+//            } else {
+//                self.errorMessage = "An entry for this app and username already exists."
+//                self.isShowError = true
+//            }
         } else {
             self.errorMessage = "All fields must be filled."
             self.isShowError = true

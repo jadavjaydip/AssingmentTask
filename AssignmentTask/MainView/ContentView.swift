@@ -27,7 +27,7 @@ struct ContentView: View {
      @State private var isError:Bool = false // Track if there is an error
      @State private var errorMessage: String = "" // Store the error message
      @State var userPIN = "" // Store the user's PIN
-  
+    @State private var isPresentEditSheet:Bool = false
 
     var body: some View {
         NavigationView {
@@ -43,7 +43,27 @@ struct ContentView: View {
                         
                         ScrollView(showsIndicators: false) {
                             ForEach(passwords) {   password in
-                                PasswordDetailsRowView(password: password)
+                               // PasswordDetailsRowView(password: password)
+                                HStack(alignment: .center, spacing: 16) {
+                                    Text(password.accountType ?? "Unknown")
+                                        .font(.headline)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.black)
+                                    Text("******")
+                                        .foregroundColor(Color.gray.opacity(0.4))
+                                    Spacer()
+                                    Image("ic_rightArrow")
+                                    
+                                }
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 50)
+                                    .padding(.horizontal, 16)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 25, style: .continuous).stroke(Color.gray, lineWidth: 1)).padding(2)
+                                    .onTapGesture {
+                                    self.selectedPassword = password
+                                    isPresentEditSheet.toggle()
+                                }
                             }
                             
                         }.padding(.bottom, 40)
@@ -71,6 +91,14 @@ struct ContentView: View {
             }
             
         }
+        .sheet(isPresented: $isPresentEditSheet) {
+            if let password = selectedPassword {
+                PasswordEditAndDeleteView(password: password, accountType: password.accountType ?? "", username: password.username ?? "", passwordText: password.password ?? "")
+                    .presentationDetents([.medium])
+                    .presentationCornerRadius(24)
+            }
+          
+        }
         // MARK: Setup Configration
         .onAppear {
             authenticateWithBiomatrice()
@@ -80,7 +108,7 @@ struct ContentView: View {
         }
         // MARK: Error Message
         .alert(isPresented: $isError) {
-            Alert(title: Text("PasswordTracker"), message: Text(errorMessage), dismissButton: .default(Text("Ok")))
+            Alert(title: Text("Password Tracker App"), message: Text(errorMessage), dismissButton: .default(Text("Ok")))
         }
         //MARK: SheetPresent
         .sheet(isPresented: $isAddPassword, content: {
@@ -165,10 +193,9 @@ struct ContentView: View {
             if userPIN.isEmpty {
                 Text("Set PIN")
                 Text("Please enter secure PIN")
-                
                 // OTP view for the first PIN input
                 OtpView(otpText: $isSecurePinFirst, activeIndicatorColor: Color.red, inactiveIndicatorColor: Color.black, length: 4) { otp in}
-                
+                Text("Please enter confirm PIN")
                 // OTP view for the second PIN input for confirmation
                 OtpView(otpText: $isSecurePinSecond, activeIndicatorColor: Color.red, inactiveIndicatorColor: Color.black, length: 4) { secondOtp in
                     if ValidationSetupPin() {
@@ -212,7 +239,7 @@ struct ContentView: View {
             self.isError = true
             return false
         }else if isSecurePinFirst != isSecurePinSecond {
-            self.errorMessage = "Please enter First PIN"
+            self.errorMessage = "PIN and Confirm PIN do not match."
             self.isError = true
             return false
         }

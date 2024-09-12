@@ -76,6 +76,8 @@
 				09888B93432CF1E7000DF930 /* CommanComponet */,
 				09A91BB02C92BF17001524A5 /* Constants */,
 				09A91BB12C92BF28001524A5 /* Assets */,
+				094D0B012C9169E500620D9F /* AssignmentTask.entitlements */,
+				094D0AFA2C9169E300620D9F /* AssignmentTask.xcdatamodeld */,
 				094D0B022C9169E500620D9F /* Preview Content */,
 			);
 			path = AssignmentTask;
@@ -118,8 +120,6 @@
 		09A91BAE2C92BECA001524A5 /* CoreDataSetup */ = {
 			isa = PBXGroup;
 			children = (
-				094D0B012C9169E500620D9F /* AssignmentTask.entitlements */,
-				094D0AFA2C9169E300620D9F /* AssignmentTask.xcdatamodeld */,
 				094D0AF82C9169E300620D9F /* Persistence.swift */,
 			);
 			path = CoreDataSetup;
