@@ -68,16 +68,14 @@
 		094D0AF52C9169E300620D9F /* AssignmentTask */ = {
 			isa = PBXGroup;
 			children = (
-				09888B8F432CF174000DF930 /* PasswordEditAndDeleteView.swift */,
+				09A91BAF2C92BED6001524A5 /* PasswordUpdateDelete */,
 				094D0AF62C9169E300620D9F /* AssignmentTaskApp.swift */,
-				094D0AF82C9169E300620D9F /* Persistence.swift */,
-				094D0AFD2C9169E300620D9F /* ContentView.swift */,
-				09888B98432CF275000DF930 /* AddPasswordView.swift */,
+				09A91BAE2C92BECA001524A5 /* CoreDataSetup */,
+				09A91BAC2C92BEAA001524A5 /* MainView */,
+				09A91BAD2C92BEB8001524A5 /* AddPassword */,
 				09888B93432CF1E7000DF930 /* CommanComponet */,
-				094D0B2A2C91AC8F00620D9F /* ApplicationConstants.swift */,
-				094D0AFF2C9169E500620D9F /* Assets.xcassets */,
-				094D0B012C9169E500620D9F /* AssignmentTask.entitlements */,
-				094D0AFA2C9169E300620D9F /* AssignmentTask.xcdatamodeld */,
+				09A91BB02C92BF17001524A5 /* Constants */,
+				09A91BB12C92BF28001524A5 /* Assets */,
 				094D0B022C9169E500620D9F /* Preview Content */,
 			);
 			path = AssignmentTask;
@@ -99,6 +97,56 @@
 				09888B96432CF24E000DF930 /* OTPView.swift */,
 			);
 			path = CommanComponet;
+			sourceTree = "<group>";
+		};
+		09A91BAC2C92BEAA001524A5 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				094D0AFD2C9169E300620D9F /* ContentView.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		09A91BAD2C92BEB8001524A5 /* AddPassword */ = {
+			isa = PBXGroup;
+			children = (
+				09888B98432CF275000DF930 /* AddPasswordView.swift */,
+			);
+			path = AddPassword;
+			sourceTree = "<group>";
+		};
+		09A91BAE2C92BECA001524A5 /* CoreDataSetup */ = {
+			isa = PBXGroup;
+			children = (
+				094D0B012C9169E500620D9F /* AssignmentTask.entitlements */,
+				094D0AFA2C9169E300620D9F /* AssignmentTask.xcdatamodeld */,
+				094D0AF82C9169E300620D9F /* Persistence.swift */,
+			);
+			path = CoreDataSetup;
+			sourceTree = "<group>";
+		};
+		09A91BAF2C92BED6001524A5 /* PasswordUpdateDelete */ = {
+			isa = PBXGroup;
+			children = (
+				09888B8F432CF174000DF930 /* PasswordEditAndDeleteView.swift */,
+			);
+			path = PasswordUpdateDelete;
+			sourceTree = "<group>";
+		};
+		09A91BB02C92BF17001524A5 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				094D0B2A2C91AC8F00620D9F /* ApplicationConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		09A91BB12C92BF28001524A5 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				094D0AFF2C9169E500620D9F /* Assets.xcassets */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
