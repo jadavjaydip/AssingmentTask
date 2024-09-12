@@ -30,7 +30,7 @@ struct ContentView: View {
     @State private var isPresentEditSheet:Bool = false
 
     var body: some View {
-        NavigationView {
+      //  NavigationView {
             ZStack(alignment: .bottomTrailing) {
                 Color("BG")
                     .ignoresSafeArea()
@@ -44,26 +44,27 @@ struct ContentView: View {
                         ScrollView(showsIndicators: false) {
                             ForEach(passwords) {   password in
                                // PasswordDetailsRowView(password: password)
-                                HStack(alignment: .center, spacing: 16) {
-                                    Text(password.accountType ?? "Unknown")
-                                        .font(.headline)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.black)
-                                    Text("******")
-                                        .foregroundColor(Color.gray.opacity(0.4))
-                                    Spacer()
-                                    Image("ic_rightArrow")
-                                    
+                                Button {
+                                    self.selectedPassword = password
+                                    isPresentEditSheet.toggle()
+                                } label: {
+                                    HStack(alignment: .center, spacing: 16) {
+                                        Text(password.accountType ?? "Unknown")
+                                            .font(.headline)
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.black)
+                                        Text("******")
+                                            .foregroundColor(Color.gray.opacity(0.4))
+                                        Spacer()
+                                        Image("ic_rightArrow")
+                                        
+                                    }
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 }
-                                    .frame(maxWidth: .infinity)
                                     .frame(height: 50)
                                     .padding(.horizontal, 16)
                                     .background(
                                         RoundedRectangle(cornerRadius: 25, style: .continuous).stroke(Color.gray, lineWidth: 1)).padding(2)
-                                    .onTapGesture {
-                                    self.selectedPassword = password
-                                    isPresentEditSheet.toggle()
-                                }
                             }
                             
                         }.padding(.bottom, 40)
@@ -90,15 +91,8 @@ struct ContentView: View {
                 }
             }
             
-        }
-        .sheet(isPresented: $isPresentEditSheet) {
-            if let password = selectedPassword {
-                PasswordEditAndDeleteView(password: password, accountType: password.accountType ?? "", username: password.username ?? "", passwordText: password.password ?? "")
-                    .presentationDetents([.medium])
-                    .presentationCornerRadius(24)
-            }
-          
-        }
+       // }
+       
         // MARK: Setup Configration
         .onAppear {
             authenticateWithBiomatrice()
@@ -116,6 +110,14 @@ struct ContentView: View {
                 .presentationDetents([.height(400)])
                 .presentationCornerRadius(24)
         })
+        .sheet(isPresented: $isPresentEditSheet) {
+            if let password = selectedPassword {
+                PasswordEditAndDeleteView(password: password, accountType: password.accountType ?? "", username: password.username ?? "", passwordText: password.password ?? "")
+                    .presentationDetents([.height(400)])
+                    .presentationCornerRadius(24)
+            }
+          
+        }
     }
     
     //MARK: Password Delete Functionality
