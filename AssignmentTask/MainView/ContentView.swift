@@ -43,7 +43,6 @@ struct ContentView: View {
                         
                         ScrollView(showsIndicators: false) {
                             ForEach(passwords) {   password in
-                               // PasswordDetailsRowView(password: password)
                                 Button {
                                     self.selectedPassword = password
                                     isPresentEditSheet.toggle()
@@ -250,34 +249,3 @@ struct ContentView: View {
 }
 
 
-//MARK: PasswordDetailsCell View
-struct PasswordDetailsRowView: View {
-    @State var password  = Password()
-    @State private var isPresentEditSheet:Bool = false
-    var body: some View {
-        Button {
-            isPresentEditSheet.toggle()
-        } label: {
-            HStack(alignment: .center, spacing: 16) {
-                Text(password.accountType ?? "Unknown")
-                    .font(.headline)
-                    .fontWeight(.bold)
-                    .foregroundColor(.black)
-                Text("******")
-                    .foregroundColor(Color.gray.opacity(0.4))
-                Spacer()
-                Image("ic_rightArrow")
-                
-            }.padding(.horizontal, 16)
-        }
-        .frame(maxWidth: .infinity)
-        .frame(height: 50)
-        .background(
-            RoundedRectangle(cornerRadius: 25, style: .continuous).stroke(Color.gray, lineWidth: 1)).padding(2)
-            .sheet(isPresented: $isPresentEditSheet) {
-                PasswordEditAndDeleteView(password: password, accountType: password.accountType ?? "", username: password.username ?? "", passwordText: password.password ?? "")
-                    .presentationDetents([.medium])
-                    .presentationCornerRadius(24)
-            }
-    }
-}
